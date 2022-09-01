@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono&display=swap');
+
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --content-bg-clr: #e1e1e1;
+    --content-txt-clr: #000;
+}
+
+.dark-theme {
+    --content-bg-clr: #1d2a35;
+    --content-txt-clr: #e1e1e1;
+}
+
+
+body {
+    font-family: 'Red Hat Mono', monospace;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 10px;
+    padding: 10px;
+    color: var(--content-txt-clr);
+    background-color: var(--content-bg-clr);
+}
+
+#main-container{
+    border: 1px solid silver;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+#container {
+    
+}
+
+h1 {
+    text-align: center;
+}
+
+#total {
+    font-weight: bolder;
+}  
+
+#totalReap {
+    margin-bottom: 5px;
+}
+
+.substats input {
+    float: left;
+    margin-right: 10px;
+}
+
+input {
+    width: 40px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+#buttons {
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+    justify-content: center;
+}
+
+button {
+    padding: 5px 15px;
+    font-family: 'Red Hat Mono', sans-serif;
+    font-size: 18px;
+}
+
+#icon {
+    position: absolute;
+    top: 32px;
+    width: 36px;
+    cursor: pointer;
+    margin-right: 12px;
+}
+
+#luck {
+    margin: 10px;
+    font-weight: bolder;
+}
+
+#gif {
+    display: block;
+    margin-inline: auto;
+    width: 65%;
+    visibility: hidden;
+}

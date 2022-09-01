@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
+    <title>Reap Simulator</title>
+</head>
+<body>
+    <div id="main-container">
+        <h1>Reap Simulator</h1>
+    <img src="./moon.png" alt="" id="icon">
+    <div id="container">
+        <div>
+            <label for="set">Select Rune Slot: </label>
+            <select name="set" id="set">
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div id="totalReap">
+            <span>Total: </span><span id="total">0</span>
+        </div>
+        <div id="subs_block">
+            <div class="substats">
+                <label id="label1" for="sub1">SUB 1</label>
+                <input type="text" id="sub1" name="sub1">
+            </div>
+            <div class="substats">
+                <label id="label2" for="sub2">SUB 2</label>
+                <input type="text" id="sub2" name="sub2">
+            </div>
+            <div class="substats">
+                <label id="label3" for="sub3">SUB 3</label>
+                <input type="text" id="sub3" name="sub3">
+            </div>
+            <div class="substats">
+                <label id="label4" for="sub4">SUB 4</label>
+                <input type="text" id="sub4" name="sub4">
+            </div>
+        </div>
+        <div id="buttons">
+            <button id="reapbtn" onclick="reap()">Reap</button>
+            <button onclick="resetCounter()">Reset</button>
+        </div>
+    </div>
+    </div>
+
+    <img id="gif" src="" alt="" >
+
+    <p id="luck"></p>
+
+    <script>
+        
+        const subs = ["SPD", "ATK%", "HP%", "DEF%", "ATK Flat", "DEF Flat", "RES", "ACC", "CRIT RATE", "CRIT DMG"];
+
+        var sub1;
+        var sub2;
+        var sub3;
+        var sub4;
+        var subFound = false;
+
+        var proc1;
+        var proc2;
+        var proc3;
+        var proc4;
+
+        var val1;
+        var val2;
+        var val3;
+        var val4;
+
+        var counter = 0;
+
+        function reap() {
+
+            proc1 = 1;
+            proc2 = 1;
+            proc3 = 1;
+            proc4 = 1;
+
+            val1 = 0;
+            val2 = 0;
+            val3 = 0;
+            val4 = 0;
+
+            // sub1
+            sub1 = Math.floor(Math.random() * 10);
+            // sub2
+            while (!subFound){
+                sub2 =  Math.floor(Math.random() * 10);
+                if (sub2 != sub1){
+                    subFound = true;
+                }
+            }
+            subFound = false;
+            // sub3
+            while (!subFound){
+                sub3 =  Math.floor(Math.random() * 10);
+                if (sub3 != sub2 && sub3 != sub1){
+                    subFound = true;
+                }
+            }
+            subFound = false;
+            // sub4
+            while (!subFound){
+                sub4 =  Math.floor(Math.random() * 10);
+                if (sub4 != sub3 && sub4 != sub2 && sub4 != sub1){
+                    subFound = true;
+                }
+            }
+            subFound = false;
+
+            // Proc per subs
+            for(let i = 0; i < 4; i++){
+                var x =  Math.floor(Math.random() * 4) + 1;
+                if (x == 1) proc1++;
+                else if (x == 2) proc2++;
+                else if (x == 3) proc3++;
+                else proc4++;
+            }
+
+            //sub 1
+            switch (sub1) {
+            case 0: // SPD
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 1: // ATK%
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 2: // HP%
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 3: // DEF% 
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 4: // ATK Flat
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 5: // DEF Flat
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 6: // RES
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 7: // ACC
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 8: // CR
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 9: // CD
+                for (let i = 0; i < proc1; i++)
+                {
+                    val1 += Math.floor(Math.random() * 4) + 4;
+                }
+                break;
+
+            }
+
+            //sub 2
+            switch (sub2) {
+            case 0: // SPD
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 1: // ATK%
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 2: // HP%
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 3: // DEF% 
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 4: // ATK Flat
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 5: // DEF Flat
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 6: // RES
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 7: // ACC
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 8: // CR
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 9: // CD
+                for (let i = 0; i < proc2; i++)
+                {
+                    val2 += Math.floor(Math.random() * 4) + 4;
+                }
+                break;
+
+            }
+
+            //sub 3
+            switch (sub3) {
+            case 0: // SPD
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 1: // ATK%
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 2: // HP%
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 3: // DEF% 
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 4: // ATK Flat
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 5: // DEF Flat
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 6: // RES
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 7: // ACC
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 8: // CR
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 9: // CD
+                for (let i = 0; i < proc3; i++)
+                {
+                    val3 += Math.floor(Math.random() * 4) + 4;
+                }
+                break;
+
+            }
+
+            //sub 4
+            switch (sub4) {
+            case 0: // SPD
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 1: // ATK%
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 2: // HP%
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 3: // DEF% 
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 4) + 5;
+                }
+                break;
+            case 4: // ATK Flat
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 5: // DEF Flat
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 11) + 10;
+                }
+                break;
+            case 6: // RES
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 7: // ACC
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 5) + 4;
+                }
+                break;
+            case 8: // CR
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 3) + 4;
+                }
+                break;
+            case 9: // CD
+                for (let i = 0; i < proc4; i++)
+                {
+                    val4 += Math.floor(Math.random() * 4) + 4;
+                }
+                break;
+
+            }
+
+            document.getElementById('label1').innerHTML = subs[sub1];
+            document.getElementById('sub1').value = val1;
+            document.getElementById('label2').innerHTML = subs[sub2];
+            document.getElementById('sub2').value = val2;
+            document.getElementById('label3').innerHTML = subs[sub3];
+            document.getElementById('sub3').value = val3;
+            document.getElementById('label4').innerHTML = subs[sub4];
+            document.getElementById('sub4').value = val4;
+
+            if ((sub1 == 0 && val1 > 24) || (sub2 == 0 && val2 > 24) || (sub3 == 0 && val3 > 24) || (sub4 == 0 && val4 > 24)) {
+                document.getElementById('reapbtn').disabled = true;
+                document.getElementById('gif').style.visibility = "visible";
+                if (counter < 100) {
+                    var str = "Ca va la chatte que t'as toi avec tes " + (counter+1) + " reaps laaaa";
+                    document.getElementById('gif').src = "./really.gif";
+                    document.getElementById('luck').innerHTML = str;
+                }
+                else if (counter >= 100 && counter < 300) {
+                    var str = "OK " + (counter+1) + " reaps c'est leggit";
+                    document.getElementById('gif').src = "./leo.gif";
+                    document.getElementById('luck').innerHTML = str;
+                }
+                else if (counter >= 300 && counter < 600) {
+                    var str = "Bon " + (counter+1) + " reaps c'est un peu beaucoup";
+                    document.getElementById('gif').src = "./dance.gif";
+                    document.getElementById('luck').innerHTML = str;
+                }
+                else if (counter >= 600 && counter < 1000){
+                    var str = "Tu viens vraiment de cliquer  " + (counter+1) + " fois ? xDDDDDDDDDD";
+                    document.getElementById('gif').src = "./lol.gif";
+                    document.getElementById('luck').innerHTML = str;
+                }
+                else if (counter >= 1000){
+                    var str = "Non mais vraiment ?  " + (counter+1) + " reaps ? faut vraiment stop le jeu c'est plus possible mec";
+                    document.getElementById('gif').src = "./stop.gif";
+                    document.getElementById('luck').innerHTML = str;
+                }
+            }
+
+
+            updateDisplay(++counter);
+            
+            }
+
+            function resetCounter() {
+                document.getElementById('label1').innerHTML = 'SUB 1';
+                document.getElementById('label2').innerHTML = 'SUB 2';
+                document.getElementById('label3').innerHTML = 'SUB 3';
+                document.getElementById('label4').innerHTML = 'SUB 4';
+                document.getElementById('sub1').value = '';
+                document.getElementById('sub2').value = '';
+                document.getElementById('sub3').value = '';
+                document.getElementById('sub4').value = '';
+                counter = 0;
+                document.getElementById('reapbtn').disabled = false;
+                document.getElementById('gif').style.visibility = "hidden";
+                document.getElementById('luck').innerHTML = "";
+                updateDisplay(counter);
+            }
+
+            function updateDisplay(val) {
+                document.getElementById("total").innerHTML = val;
+            }
+
+    </script>
+
+</body>
+
+</html>
